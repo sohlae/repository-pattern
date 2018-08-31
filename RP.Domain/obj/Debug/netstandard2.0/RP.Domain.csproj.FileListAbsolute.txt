@@ -1,0 +1,9 @@
+c:\users\mojs\source\repos\Repository_Pattern\RP.Domain\bin\Debug\netstandard2.0\RP.Domain.deps.json
+c:\users\mojs\source\repos\Repository_Pattern\RP.Domain\bin\Debug\netstandard2.0\RP.Domain.dll
+c:\users\mojs\source\repos\Repository_Pattern\RP.Domain\bin\Debug\netstandard2.0\RP.Domain.pdb
+c:\users\mojs\source\repos\Repository_Pattern\RP.Domain\obj\Debug\netstandard2.0\RP.Domain.csproj.CoreCompileInputs.cache
+c:\users\mojs\source\repos\Repository_Pattern\RP.Domain\obj\Debug\netstandard2.0\RP.Domain.AssemblyInfoInputs.cache
+c:\users\mojs\source\repos\Repository_Pattern\RP.Domain\obj\Debug\netstandard2.0\RP.Domain.AssemblyInfo.cs
+c:\users\mojs\source\repos\Repository_Pattern\RP.Domain\obj\Debug\netstandard2.0\RP.Domain.dll
+c:\users\mojs\source\repos\Repository_Pattern\RP.Domain\obj\Debug\netstandard2.0\RP.Domain.pdb
+C:\Users\mojs\source\repos\Repository_Pattern\RP.Domain\obj\Debug\netstandard2.0\RP.Domain.csprojAssemblyReference.cache
