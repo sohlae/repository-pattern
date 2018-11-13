@@ -7,7 +7,7 @@ using System.Data.SqlClient;
 
 namespace RP.Data.StoredProcedures
 {
-    public class Context : IContext
+    public class Context
     {
         public string _connectionString;
         private SqlConnection _connection;

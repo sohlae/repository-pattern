@@ -1,8 +1,5 @@
 ﻿using RP.Data.Core;
-using RP.Data.StoredProcedures;
 using RP.Data.StoredProcedures.Repositories;
-using System;
-using System.Data.SqlClient;
 
 namespace RP.Data.StoredProcedures
 {

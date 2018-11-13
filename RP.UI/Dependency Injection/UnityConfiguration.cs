@@ -20,14 +20,12 @@ namespace RP.UI.Dependency_Injection
 
             #region Data Layer
             /* This container sets up the Entity Framework dependencies */
-            container.RegisterType<IContext, RPContext>(new HierarchicalLifetimeManager());
-            container.RegisterType<IUnitOfWork, Data.EF.UnitOfWork>(new HierarchicalLifetimeManager());
-            container.RegisterType<IEmployeeRepository, Data.EF.Repositories.EmployeeRepository>();
+            //container.RegisterType<IUnitOfWork, Data.EF.UnitOfWork>(new HierarchicalLifetimeManager());
+            //container.RegisterType<IEmployeeRepository, Data.EF.Repositories.EmployeeRepository>();
 
             /* This container sets up the Stored Procedure dependencies */
-            //container.RegisterType<IContext, Context>(new HierarchicalLifetimeManager());
-            //container.RegisterType<IUnitOfWork, Data.StoredProcedures.UnitOfWork>(new HierarchicalLifetimeManager());
-            //container.RegisterType<IEmployeeRepository, Data.StoredProcedures.Repositories.EmployeeRepository>();
+            container.RegisterType<IUnitOfWork, Data.StoredProcedures.UnitOfWork>(new HierarchicalLifetimeManager());
+            container.RegisterType<IEmployeeRepository, Data.StoredProcedures.Repositories.EmployeeRepository>();
             #endregion
 
             #region Business Layer

@@ -23,6 +23,11 @@ namespace RP.Data.EF.Repositories
             _entities.Add(entity);
         }
 
+        public IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate)
+        {
+            return _entities.Where(predicate);
+        }
+
         public void AddRange(IEnumerable<TEntity> entities)
         {
             _entities.AddRange(entities);

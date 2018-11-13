@@ -1,8 +1,10 @@
 ﻿using RP.Data.Core;
 using RP.Domain;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Linq.Expressions;
 
 namespace RP.Data.StoredProcedures.Repositories
 {
@@ -13,7 +15,6 @@ namespace RP.Data.StoredProcedures.Repositories
         public EmployeeRepository(Context context)
         {
             _context = context;
-
         }
 
         public void Add(Employee employee)
@@ -35,6 +36,12 @@ namespace RP.Data.StoredProcedures.Repositories
         {
             return _context.GetAll<Employee>("sp_SelectAllEmployees");
         }
+
+        public IEnumerable<Employee> Find(Expression<Func<Employee, bool>> predicate)
+        {
+            throw new NotImplementedException();
+        }
+
 
         public void Remove(Employee employee)
         {
@@ -76,5 +83,6 @@ namespace RP.Data.StoredProcedures.Repositories
                 }
             }
         }
+
     }
 }

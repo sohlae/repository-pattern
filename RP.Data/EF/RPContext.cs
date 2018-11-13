@@ -7,7 +7,7 @@ using System.IO;
 
 namespace RP.Data.EF
 {
-    public class RPContext : DbContext, IContext
+    public class RPContext : DbContext
     {
         public RPContext() : base() { }
 

@@ -3,6 +3,7 @@ using RP.Business.Core;
 using RP.Business.Dto;
 using RP.Data.Core;
 using RP.Domain;
+using System;
 using System.Collections.Generic;
 
 namespace RP.Business
@@ -18,21 +19,42 @@ namespace RP.Business
 
         public EmployeeDto AddEmployee(EmployeeDto employeeDto)
         {
-            var employee = Mapper.Map<Employee>(employeeDto);
+            if (employeeDto == null) return null;
 
-            _unitOfWork.Employees
-                .Add(employee);
-            _unitOfWork.Complete();
+            try
+            {
+                var employee = Mapper.Map<Employee>(employeeDto);
 
-            return Mapper.Map<EmployeeDto>(employee); 
+                _unitOfWork.Employees
+                    .Add(employee);
+
+                _unitOfWork.Complete();
+
+                return Mapper.Map<EmployeeDto>(employee);
+            }
+            
+            catch (Exception exception)
+            {
+                throw exception;
+            }
         }
 
         public EmployeeDto GetEmployeeById(int id)
         {
-            var employee = _unitOfWork.Employees
-                .Get(id);
+            try
+            {
+                var employee = _unitOfWork.Employees
+                    .Get(id);
 
-            return Mapper.Map<EmployeeDto>(employee);
+                return employee != null ?
+                    Mapper.Map<EmployeeDto>(employee) :
+                    null;
+            }
+
+            catch (Exception exception)
+            {
+                throw exception;
+            }
         }
 
         // Could be used for displaying all the employees to the user interface (i.e. website)
