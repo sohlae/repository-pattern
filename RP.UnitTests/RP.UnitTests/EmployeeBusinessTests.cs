@@ -98,5 +98,11 @@ namespace RP.UnitTests
 
             Assert.That(result.Id, Is.EqualTo(_employee.Id));
         }
+
+        [Test]
+        public void GetEmployees_WhenCalled_ShouldReturnListOfEmployees()
+        {
+
+        }
     }
 }
