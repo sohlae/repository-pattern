@@ -68,23 +68,11 @@ namespace RP.UnitTests
         }
 
         [Test]
-        public void AddEmployee_EmployeeIsNull_DoNotAddAnythingToDatabase()
+        public void AddEmployee_EmployeeIsNull_ThrowArgumentNullException()
         {
             _employeeBusiness = new EmployeeBusiness(_unitOfWork.Object);
 
-            _employeeBusiness.AddEmployee(null);
-
-            _unitOfWork.Verify(uow => uow.Employees.Add(It.IsAny<Employee>()), Times.Never);
-        }
-
-        [Test]
-        public void AddEmployee_EmployeeIsNull_ReturnNull()
-        {
-            _employeeBusiness = new EmployeeBusiness(_unitOfWork.Object);
-
-            var result = _employeeBusiness.AddEmployee(null);
-
-            Assert.IsNull(result);
+            Assert.That(() => _employeeBusiness.AddEmployee(null), Throws.ArgumentNullException);
         }
 
         [Test]

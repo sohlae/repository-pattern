@@ -19,7 +19,7 @@ namespace RP.Business
 
         public EmployeeDto AddEmployee(EmployeeDto employeeDto)
         {
-            if (employeeDto == null) return null;
+            if (employeeDto == null) throw new ArgumentNullException("employeeDto", "Employee cannot be null.");
 
             try
             {
