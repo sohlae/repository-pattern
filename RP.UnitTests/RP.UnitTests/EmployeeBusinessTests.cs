@@ -6,7 +6,6 @@ using RP.Business.Dto;
 using RP.Business.Profiles;
 using RP.Data.Core;
 using RP.Domain;
-using System;
 
 namespace RP.UnitTests
 {
@@ -14,10 +13,10 @@ namespace RP.UnitTests
     public class EmployeeBusinessTests
     {
         private Employee _employee;
-        private EmployeeDto _employeeDto;
+        private EmployeeDto _dto;
+        private EmployeeBusiness _business;
 
         private Mock<IUnitOfWork> _unitOfWork;
-        private EmployeeBusiness _employeeBusiness;
 
         public EmployeeBusinessTests()
         {
@@ -27,20 +26,8 @@ namespace RP.UnitTests
         [SetUp]
         public void SetUp()
         {
-            _employee = new Employee
-            {
-                Id = 1,
-                FirstName = "John",
-                LastName = "Smith",
-                BirthDate = new DateTime(1965, 12, 31)
-            };
-
-            _employeeDto = new EmployeeDto
-            {
-                FirstName = "John",
-                LastName = "Smith",
-                BirthDate = new DateTime(1965, 12, 31)
-            };
+            _employee = new Employee { FirstName = "John" };
+            _dto = new EmployeeDto { FirstName = "John" };
 
             _unitOfWork = new Mock<IUnitOfWork>();
         }
@@ -48,31 +35,33 @@ namespace RP.UnitTests
         [Test]
         public void AddEmployee_EmployeeIsNotNull_AddEmployeeToDatabase()
         {
-            _unitOfWork.Setup(uow => uow.Employees.Add(new Employee()));
-            _employeeBusiness = new EmployeeBusiness(_unitOfWork.Object);
+            _unitOfWork.Setup(uow => uow.Employees.Add(_employee));
+            _business = new EmployeeBusiness(_unitOfWork.Object);
 
-            _employeeBusiness.AddEmployee(_employeeDto);
+            _business.AddEmployee(_dto);
 
-            _unitOfWork.Verify(uow => uow.Employees.Add(It.IsAny<Employee>()), Times.Once);
+            _unitOfWork.Verify(
+                uow => uow.Employees.Add(It.Is<Employee>(e => e.FirstName == "John")), 
+                Times.Once);
         }
 
         [Test]
-        public void AddEmployee_EmployeeIsNotNull_ReturnEmployeeObject()
+        public void AddEmployee_EmployeeIsNotNull_EmployeeFirstNameShouldBeJohn()
         {
-            _unitOfWork.Setup(uow => uow.Employees.Add(new Employee()));
-            _employeeBusiness = new EmployeeBusiness(_unitOfWork.Object);
+            _unitOfWork.Setup(uow => uow.Employees.Add(_employee));
+            _business = new EmployeeBusiness(_unitOfWork.Object);
 
-            var result = _employeeBusiness.AddEmployee(_employeeDto);
+            var result = _business.AddEmployee(_dto);
 
-            Assert.That(result, Is.TypeOf<EmployeeDto>());
+            Assert.That(result.FirstName, Is.EqualTo("John"));
         }
 
         [Test]
         public void AddEmployee_EmployeeIsNull_ThrowArgumentNullException()
         {
-            _employeeBusiness = new EmployeeBusiness(_unitOfWork.Object);
+            _business = new EmployeeBusiness(_unitOfWork.Object);
 
-            Assert.That(() => _employeeBusiness.AddEmployee(null), Throws.ArgumentNullException);
+            Assert.That(() => _business.AddEmployee(null), Throws.ArgumentNullException);
         }
 
         [Test]
@@ -80,23 +69,23 @@ namespace RP.UnitTests
         {
             _unitOfWork.Setup(uow => uow.Employees.Get(1))
                 .Returns((Employee)null);
-            _employeeBusiness = new EmployeeBusiness(_unitOfWork.Object);
+            _business = new EmployeeBusiness(_unitOfWork.Object);
 
-            var result = _employeeBusiness.GetEmployeeById(1);
+            var result = _business.GetEmployeeById(1);
 
             Assert.IsNull(result);
         }
 
         [Test]
-        public void GetEmployeeById_EmployeeExists_ReturnsEmployeeAsDto()
+        public void GetEmployeeById_EmployeeExists_ReturnsEmployeeWithFirstNameOfJohn()
         {
             _unitOfWork.Setup(uow => uow.Employees.Get(1))
                 .Returns(_employee);
-            _employeeBusiness = new EmployeeBusiness(_unitOfWork.Object);
+            _business = new EmployeeBusiness(_unitOfWork.Object);
 
-            var result = _employeeBusiness.GetEmployeeById(1);
+            var result = _business.GetEmployeeById(1);
 
-            Assert.That(result.Id, Is.EqualTo(_employee.Id));
+            Assert.That(result.FirstName, Is.EqualTo("John"));
         }
 
         [Test]
