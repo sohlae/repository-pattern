@@ -5,7 +5,7 @@ using RP.Business;
 using RP.Business.Dto;
 using RP.Business.Profiles;
 using RP.Data.Core;
-using RP.Domain;
+using RP.Data.Entities;
 
 namespace RP.UnitTests
 {

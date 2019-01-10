@@ -1,4 +1,4 @@
-﻿using RP.Domain;
+﻿using RP.Data.Entities;
 using System.Collections.Generic;
 
 namespace RP.Data.Core

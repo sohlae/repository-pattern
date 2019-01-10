@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using RP.Business.Dto;
-using RP.Domain;
+using RP.Data.Entities;
 
 namespace RP.Business.Profiles
 {
