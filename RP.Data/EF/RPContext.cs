@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using RP.Data.EF.EntityConfigurations;
-using RP.Domain;
+using RP.Data.Entities;
 using System.IO;
 
 namespace RP.Data.EF

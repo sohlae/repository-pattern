@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using RP.Domain;
+using RP.Data.Entities;
 
 namespace RP.Data.EF.EntityConfigurations
 {

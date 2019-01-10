@@ -1,5 +1,5 @@
 ﻿using RP.Data.Core;
-using RP.Domain;
+using RP.Data.Entities;
 using System;
 using System.Collections.Generic;
 using System.Data;

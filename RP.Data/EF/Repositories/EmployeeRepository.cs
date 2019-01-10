@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using RP.Data.Core;
-using RP.Domain;
+using RP.Data.Entities;
 
 namespace RP.Data.EF.Repositories
 {
