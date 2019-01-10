@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using RP.Data.Core;
 using RP.Data.EF.EntityConfigurations;
 using RP.Domain;
 using System.IO;
