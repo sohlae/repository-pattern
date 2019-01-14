@@ -29,4 +29,4 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
     testSelector: 'testAssemblies'
-    testAssemblyVer2: '**\*UnitTests.dll,!**\*TestAdapter.dll,!**\obj\**'
+    testAssemblyVer2: '**\*unittests.dll,!**\*TestAdapter.dll,!**\obj\**'
