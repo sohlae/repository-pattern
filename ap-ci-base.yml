@@ -25,8 +25,12 @@ steps:
     configuration: '$(buildConfiguration)'
 
 - task: VSTest@2
+  displayName: 'Run Unit Tests'
   inputs:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
     testSelector: 'testAssemblies'
-    testAssemblyVer2: '**\*unittests.dll!**\*TestAdapter.dll!**\obj\**'
+    testAssemblyVer2: **\$(BuildConfiguration)\**\*unittest*.dll
+      !**\*TestAdapter.dll
+      !**\obj\**
+    otherConsoleOptions: '/platform:x64 /Framework:.NETCoreApp,Version=v2.0 /logger:console;verbosity="normal"'
