@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using RP.Business.Core;
 using RP.Business.Dto;
-using RP.Data.Core;
-using RP.Data.Entities;
+using RP.DataAccess.RepositoryPattern.Core;
+using RP.DataAccess.RepositoryPattern.Entities;
 using System;
 using System.Collections.Generic;
 

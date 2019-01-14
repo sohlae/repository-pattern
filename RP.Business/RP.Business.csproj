@@ -5,11 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\RP.Data\RP.Data.csproj" />
+    <PackageReference Include="Automapper" Version="7.0.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Automapper" Version="7.0.1" />
+    <ProjectReference Include="..\Data Access Layer\RP.Repository_Pattern\RP.RepositoryPattern.csproj" />
   </ItemGroup>
 
 </Project>
