@@ -30,5 +30,8 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
     testSelector: 'testAssemblies'
-    testAssemblyVer2: '**\*unittest*.dll,!**\*TestAdapter.dll,!**\obj\**'
+    testAssemblyVer2: | 
+    **\*unittest*.dll
+    !**\*TestAdapter.dll
+    !**\obj\**
     otherConsoleOptions: '/platform:x64 /Framework:.NETCoreApp,Version=v2.0 /logger:console;verbosity="normal"'
