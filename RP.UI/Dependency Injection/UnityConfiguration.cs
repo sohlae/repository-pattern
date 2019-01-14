@@ -2,13 +2,13 @@
 using Microsoft.Extensions.Configuration;
 using RP.Business;
 using RP.Business.Core;
-using RP.Data.Core;
-using RP.Data.EF;
-using RP.Data.StoredProcedures;
+using RP.DataAccess.RepositoryPattern.Core;
 using System.IO;
 using Unity;
 using Unity.Injection;
 using Unity.Lifetime;
+using ef = RP.DataAccess.RepositoryPattern.EF;
+using sp = RP.DataAccess.RepositoryPattern.StoredProcedures;
 
 namespace RP.UI.Dependency_Injection
 {
@@ -20,12 +20,12 @@ namespace RP.UI.Dependency_Injection
 
             #region Data Layer
             /* This container sets up the Entity Framework dependencies */
-            //container.RegisterType<IUnitOfWork, Data.EF.UnitOfWork>(new HierarchicalLifetimeManager());
-            //container.RegisterType<IEmployeeRepository, Data.EF.Repositories.EmployeeRepository>();
+            container.RegisterType<IUnitOfWork, ef.UnitOfWork>(new HierarchicalLifetimeManager());
+            container.RegisterType<IEmployeeRepository, ef.Repositories.EmployeeRepository>();
 
             /* This container sets up the Stored Procedure dependencies */
-            container.RegisterType<IUnitOfWork, Data.StoredProcedures.UnitOfWork>(new HierarchicalLifetimeManager());
-            container.RegisterType<IEmployeeRepository, Data.StoredProcedures.Repositories.EmployeeRepository>();
+            container.RegisterType<IUnitOfWork, sp.UnitOfWork>(new HierarchicalLifetimeManager());
+            container.RegisterType<IEmployeeRepository, sp.Repositories.EmployeeRepository>();
             #endregion
 
             #region Business Layer
