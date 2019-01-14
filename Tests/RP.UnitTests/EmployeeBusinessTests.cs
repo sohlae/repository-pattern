@@ -4,8 +4,8 @@ using NUnit.Framework;
 using RP.Business;
 using RP.Business.Dto;
 using RP.Business.Profiles;
-using RP.Data.Core;
-using RP.Data.Entities;
+using RP.DataAccess.RepositoryPattern.Core;
+using RP.DataAccess.RepositoryPattern.Entities;
 
 namespace RP.UnitTests
 {
