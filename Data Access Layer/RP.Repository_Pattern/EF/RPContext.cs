@@ -1,26 +1,45 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Azure.KeyVault;
+using Microsoft.Azure.Services.AppAuthentication;
+using Microsoft.EntityFrameworkCore;
 using RP.DataAccess.RepositoryPattern.EF.EntityConfigurations;
 using RP.DataAccess.RepositoryPattern.Entities;
-using System.IO;
 
 namespace RP.DataAccess.RepositoryPattern.EF
 {
     public class RPContext : DbContext
     {
+        private KeyVaultClient _client;
+
         public RPContext() : base() { }
 
         public DbSet<Employee> Employees { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            var builder = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+            _client = new KeyVaultClient(
+                new KeyVaultClient.AuthenticationCallback(new AzureServiceTokenProvider().KeyVaultTokenCallback));
 
-            IConfigurationRoot configuration = builder.Build();
+            var username = GetUsername();
+            var password = GetPassword();
 
-            optionsBuilder.UseSqlServer(configuration.GetConnectionString("RPContext"));
+            var connectionString = $@"Server=tcp:ernidb.database.windows.net,1433;
+                Initial Catalog=RP.RepositoryPatternDb;
+                Persist Security Info=False;
+                User ID={ username };
+                Password={ password };
+                MultipleActiveResultSets=False;
+                Encrypt=True;
+                TrustServerCertificate=False;
+                Connection Timeout=30;";
+
+            //var builder = new ConfigurationBuilder()
+            //    .SetBasePath(Directory.GetCurrentDirectory())
+            //    .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+
+            //IConfigurationRoot configuration = builder.Build();
+
+            //optionsBuilder.UseSqlServer(configuration.GetConnectionString("RPContext"));
+            optionsBuilder.UseSqlServer(connectionString);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -36,6 +55,24 @@ namespace RP.DataAccess.RepositoryPattern.EF
         public new void Dispose()
         {
             base.Dispose();
+        }
+
+        public string GetUsername()
+        {
+            var username = _client
+                .GetSecretAsync("https://rp-vault-sea.vault.azure.net/secrets/rpdb-username/b9ea59e3642a46d58fe07b8eb359ca34")
+                .Result;
+
+            return username.Value;
+        }
+
+        public string GetPassword()
+        {
+            var password = _client
+                .GetSecretAsync("https://rp-vault-sea.vault.azure.net/secrets/rp-db-password/9a8f60e43f8a479e8863dbf7cb273dae")
+                .Result;
+
+            return password.Value;
         }
     }
 }

@@ -24,8 +24,8 @@ namespace RP.UI.Dependency_Injection
             container.RegisterType<IEmployeeRepository, ef.Repositories.EmployeeRepository>();
 
             /* This container sets up the Stored Procedure dependencies */
-            container.RegisterType<IUnitOfWork, sp.UnitOfWork>(new HierarchicalLifetimeManager());
-            container.RegisterType<IEmployeeRepository, sp.Repositories.EmployeeRepository>();
+            //container.RegisterType<IUnitOfWork, sp.UnitOfWork>(new HierarchicalLifetimeManager());
+            //container.RegisterType<IEmployeeRepository, sp.Repositories.EmployeeRepository>();
             #endregion
 
             #region Business Layer

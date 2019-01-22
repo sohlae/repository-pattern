@@ -40,7 +40,7 @@ namespace RP.DataAccess.RepositoryPattern.EF.Repositories
 
         public IEnumerable<TEntity> GetAll()
         {
-            return _entities.ToList();
+             return _entities.ToList();
         }
 
         public void Remove(TEntity entity)
