@@ -72,5 +72,20 @@ namespace RP.IntegrationTests.DataAccessLayer
 
             Assert.That(_employee.Id, Is.Not.EqualTo(0));
         }
+
+        [Test]
+        public void Find_WhenCalled_CountShouldBe1()
+        {
+            var result = _unitOfWork.Employees
+                .Find(e => e.FirstName == "Integration-0");
+
+            Assert.That(result.Count(), Is.EqualTo(1));
+        }
+
+        [Test]
+        public void Find_WhenCalled_ReturnTypeShouldBeIEnumberableOfEmployee()
+        {
+
+        }
     }
 }
