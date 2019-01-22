@@ -33,6 +33,7 @@ steps:
 
 - task: AzureCLI@1
   inputs:
+    azureSubscription: mojs@erni.ph
     scriptLocation: 'inlineScript'
     inlineScript: az login
 
