@@ -13,29 +13,37 @@ variables:
 
 steps:
 - task: NuGetToolInstaller@0
+  displayName: 'Install NuGet'
 
 - task: NuGetCommand@2
+  displayName: 'Restore NuGet Packages'
   inputs:
     restoreSolution: '$(solution)'
 
 - task: NodeTool@0
+  displayName: 'Use Node Version 8.x'
   inputs:
     versionSpec: '8.x'
 
 - script: npm install
+  displayName: 'npm install'
+
 - script: npm install -g azure-cli
+  displayName: 'npm install AzureCLI'
 
 - task: VSBuild@1
+  displayName: 'Build Solution'
   inputs:
     solution: '$(solution)'
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
 - task: AzureCLI@1
+  displayName: 'Login to Azure'
   inputs:
-    azureSubscription: mojs@erni.ph
+    azureSubscription: ERNIConnection
     scriptLocation: 'inlineScript'
-    inlineScript: az login
+    inlineScript: echo ""
 
 - task: VSTest@2
   displayName: 'Run Unit and Integration Tests'
