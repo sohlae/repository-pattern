@@ -43,7 +43,7 @@ steps:
   inputs:
     azureSubscription: ErniConnection
     scriptLocation: 'inlineScript'
-    inlineScript: az login --debug
+    inlineScript: az login -u mojs@erni.ph -p 2Y6oN11BWUO
 
 - task: VSTest@2
   displayName: 'Run Unit and Integration Tests'
