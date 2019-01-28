@@ -41,9 +41,9 @@ steps:
 - task: AzureCLI@1
   displayName: 'Login to Azure'
   inputs:
-    azureSubscription: ErniConnection
+    azureSubscription: ERNIConnection
     scriptLocation: 'inlineScript'
-    inlineScript: "az account show"
+    inlineScript: "az login"
 
 - task: VSTest@2
   displayName: 'Run Unit and Integration Tests'
