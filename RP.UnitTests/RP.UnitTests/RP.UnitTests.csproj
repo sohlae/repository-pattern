@@ -4,6 +4,12 @@
     <TargetFramework>netcoreapp2.0</TargetFramework>
   </PropertyGroup>
 
+  <PropertyGroup>
+   <RuntimeFrameworkVersion>2.0.0</RuntimeFrameworkVersion>
+   <PlatformTarget>AnyCPU</PlatformTarget>
+   <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+  </PropertyGroup>
+   
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.9.0" />
     <PackageReference Include="Moq" Version="4.10.0" />
