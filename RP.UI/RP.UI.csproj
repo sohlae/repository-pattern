@@ -5,6 +5,12 @@
     <TargetFramework>netcoreapp2.0</TargetFramework>
   </PropertyGroup>
 
+   <PropertyGroup>
+    <RuntimeFrameworkVersion>2.0.0</RuntimeFrameworkVersion>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+   </PropertyGroup>
+  
   <ItemGroup>
     <PackageReference Include="Automapper" Version="7.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.0.3" />
