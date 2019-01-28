@@ -1,8 +1,11 @@
 ﻿using Microsoft.Azure.KeyVault;
 using Microsoft.Azure.Services.AppAuthentication;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using RP.DataAccess.RepositoryPattern.EF.EntityConfigurations;
 using RP.DataAccess.RepositoryPattern.Entities;
+using System;
+using System.IO;
 
 namespace RP.DataAccess.RepositoryPattern.EF
 {
@@ -16,12 +19,28 @@ namespace RP.DataAccess.RepositoryPattern.EF
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            _client = new KeyVaultClient(
-                 new KeyVaultClient.AuthenticationCallback(new AzureServiceTokenProvider().KeyVaultTokenCallback));
+            string username, password;
+            try
+            {
+                _client = new KeyVaultClient(
+                    new KeyVaultClient.AuthenticationCallback(new AzureServiceTokenProvider().KeyVaultTokenCallback));
 
-            var username = GetUsername();
-            var password = GetPassword();
-            var connectionString = $@"Server=tcp:ernidb.database.windows.net,1433;
+                username = GetUsername();
+                password = GetPassword();
+            }
+
+        catch (Exception)
+        {
+                var builder = new ConfigurationBuilder()
+                    .SetBasePath(Directory.GetCurrentDirectory())
+                    .AddJsonFile("appsettings.json");
+
+                var configuration = builder.Build();
+                username = configuration["ConnectionStrings:Username"];
+                password = configuration["ConnectionStrings:Password"];
+        }
+
+        var connectionString = $@"Server=tcp:ernidb.database.windows.net,1433;
                 Initial Catalog=RP.RepositoryPatternDb;
                 Persist Security Info=False;
                 User ID={ username };
