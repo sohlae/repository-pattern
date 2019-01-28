@@ -16,6 +16,7 @@ steps:
   displayName: 'Install NuGet'
 
 - task: NuGetCommand@2
+  displayName: 'Restore solution using NuGet'
   inputs:
     restoreSolution: '$(solution)'
 
@@ -34,7 +35,7 @@ steps:
 
 - task: AzureCLI@1
   inputs:
-    azureSubscription: mojs@erni.ph
+    azureSubscription: ErniConnection
     scriptLocation: 'inlineScript'
     inlineScript: az login
 
