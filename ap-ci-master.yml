@@ -13,6 +13,7 @@ variables:
 
 steps:
 - task: NuGetToolInstaller@0
+  displayName: 'Install NuGet'
 
 - task: NuGetCommand@2
   inputs:
