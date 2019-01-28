@@ -18,16 +18,33 @@ steps:
   inputs:
     restoreSolution: '$(solution)'
 
+- task: NodeTool@0
+  inputs:
+    versionSpec: '8.x'
+
+- script: npm install
+- script: npm install -g azure-cli
+
 - task: VSBuild@1
   inputs:
     solution: '$(solution)'
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
+- task: AzureCLI@1
+  inputs:
+    azureSubscription: mojs@erni.ph
+    scriptLocation: 'inlineScript'
+    inlineScript: az login
+
 - task: VSTest@2
+  displayName: 'Run Unit and Integration Tests'
   inputs:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
     testSelector: 'testAssemblies'
-    testAssemblyVer2: '**\*UnitTests.dll!**\obj\**'
-
+    testAssemblyVer2: | 
+      **\*test*.dll
+      !**\*TestAdapter.dll
+      !**\obj\**
+    otherConsoleOptions: '/platform:x64 /Framework:.NETCoreApp,Version=v2.0 /logger:console;verbosity="normal"'
