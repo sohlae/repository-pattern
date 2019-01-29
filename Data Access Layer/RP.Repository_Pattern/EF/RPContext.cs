@@ -12,7 +12,7 @@ namespace RP.DataAccess.RepositoryPattern.EF
 {
     public class RPContext : DbContext
     {
-        private KeyVaultClient _client;
+        //private KeyVaultClient _client;
 
         public RPContext() : base() { }
 
@@ -41,8 +41,6 @@ namespace RP.DataAccess.RepositoryPattern.EF
                     username = configuration["ConnectionStrings:Username"];
                     password = configuration["ConnectionStrings:Password"];
             //}
-
-            Console.Write($"Username: { username }");
 
             var connectionString = $@"Server=tcp:ernidb.database.windows.net,1433;
                     Initial Catalog=RP.RepositoryPatternDb;
