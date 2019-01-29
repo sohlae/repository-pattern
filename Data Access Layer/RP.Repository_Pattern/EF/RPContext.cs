@@ -20,6 +20,7 @@ namespace RP.DataAccess.RepositoryPattern.EF
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             string username, password;
+
             try
             {
                 _client = new KeyVaultClient(
@@ -29,26 +30,26 @@ namespace RP.DataAccess.RepositoryPattern.EF
                 password = GetPassword();
             }
 
-        catch (Exception)
-        {
-                var builder = new ConfigurationBuilder()
-                    .SetBasePath(Directory.GetCurrentDirectory())
-                    .AddJsonFile("appsettings.json");
+            catch (Exception)
+            {
+                    var builder = new ConfigurationBuilder()
+                        .SetBasePath(Directory.GetCurrentDirectory())
+                        .AddJsonFile("appsettings.json");
 
-                var configuration = builder.Build();
-                username = configuration["ConnectionStrings:Username"];
-                password = configuration["ConnectionStrings:Password"];
-        }
+                    var configuration = builder.Build();
+                    username = configuration["ConnectionStrings:Username"];
+                    password = configuration["ConnectionStrings:Password"];
+            }
 
-        var connectionString = $@"Server=tcp:ernidb.database.windows.net,1433;
-                Initial Catalog=RP.RepositoryPatternDb;
-                Persist Security Info=False;
-                User ID={ username };
-                Password={ password };
-                MultipleActiveResultSets=False;
-                Encrypt=True;
-                TrustServerCertificate=False;
-                Connection Timeout=30;";
+            var connectionString = $@"Server=tcp:ernidb.database.windows.net,1433;
+                    Initial Catalog=RP.RepositoryPatternDb;
+                    Persist Security Info=False;
+                    User ID={ username };
+                    Password={ password };
+                    MultipleActiveResultSets=False;
+                    Encrypt=True;
+                    TrustServerCertificate=False;
+                    Connection Timeout=30;";
 
             optionsBuilder.UseSqlServer(connectionString);
         }
