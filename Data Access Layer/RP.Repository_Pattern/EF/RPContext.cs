@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using RP.DataAccess.RepositoryPattern.EF.EntityConfigurations;
 using RP.DataAccess.RepositoryPattern.Entities;
 using System;
+using System.Diagnostics;
 using System.IO;
 
 namespace RP.DataAccess.RepositoryPattern.EF
@@ -21,17 +22,17 @@ namespace RP.DataAccess.RepositoryPattern.EF
         {
             string username, password;
 
-            try
-            {
-                _client = new KeyVaultClient(
-                    new KeyVaultClient.AuthenticationCallback(new AzureServiceTokenProvider().KeyVaultTokenCallback));
+            //try
+            //{
+            //    _client = new KeyVaultClient(
+            //        new KeyVaultClient.AuthenticationCallback(new AzureServiceTokenProvider().KeyVaultTokenCallback));
 
-                username = GetUsername();
-                password = GetPassword();
-            }
+            //    username = GetUsername();
+            //    password = GetPassword();
+            //}
 
-            catch (Exception)
-            {
+            //catch (Exception)
+            //{
                     var builder = new ConfigurationBuilder()
                         .SetBasePath(Directory.GetCurrentDirectory())
                         .AddJsonFile("appsettings.json");
@@ -39,7 +40,9 @@ namespace RP.DataAccess.RepositoryPattern.EF
                     var configuration = builder.Build();
                     username = configuration["ConnectionStrings:Username"];
                     password = configuration["ConnectionStrings:Password"];
-            }
+            //}
+
+            Console.Write($"Username: { username }");
 
             var connectionString = $@"Server=tcp:ernidb.database.windows.net,1433;
                     Initial Catalog=RP.RepositoryPatternDb;
