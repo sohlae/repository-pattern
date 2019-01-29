@@ -20,17 +20,6 @@ steps:
   inputs:
     restoreSolution: '$(solution)'
 
-- task: NodeTool@0
-  displayName: 'Use Node Version 8.x'
-  inputs:
-    versionSpec: '8.x'
-
-- script: npm install
-  displayName: 'npm install'
-
-- script: npm install -g azure-cli
-  displayName: 'npm install AzureCLI'
-
 - task: VSBuild@1
   displayName: 'Build Solution'
   inputs:
@@ -38,12 +27,13 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
-- task: AzureCLI@1
-  displayName: 'Login to Azure'
+- task: AzureRmWebAppDeployment@4
   inputs:
-    azureSubscription: ERNIConnection
-    scriptLocation: 'inlineScript'
-    inlineScript: echo ""
+    connectionType: 'AzureRM'
+    azureSubscription: 'ERNIConnection'
+    appType: 'webApp'
+    webAppName: 'AzureDevOps.mojs.928065d4-2e9d-4441-ab7c-0d07f01cb173'
+    jSONFiles: '../appsettings.json'
 
 - task: VSTest@2
   displayName: 'Run Unit and Integration Tests'
