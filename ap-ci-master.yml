@@ -27,13 +27,10 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
-- task: AzureRmWebAppDeployment@4
+- task: qetza.replacetokens.replacetokens-task.replacetokens@3
+  displayName: 'Replace tokens in **/appsettings.json'
   inputs:
-    connectionType: 'AzureRM'
-    azureSubscription: 'ERNIConnection'
-    appType: 'webApp'
-    webAppName: 'AzureDevOps.mojs.928065d4-2e9d-4441-ab7c-0d07f01cb173'
-    jSONFiles: '../appsettings.json'
+    targetFiles: '**/appsettings.json'
 
 - task: VSTest@2
   displayName: 'Run Unit and Integration Tests'
