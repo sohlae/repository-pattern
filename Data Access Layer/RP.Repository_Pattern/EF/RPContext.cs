@@ -12,7 +12,7 @@ namespace RP.DataAccess.RepositoryPattern.EF
     public class RPContext : DbContext
     {
         private KeyVaultClient _client;
-
+        
         public RPContext() : base() { }
 
         public DbSet<Employee> Employees { get; set; }
