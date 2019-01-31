@@ -6,6 +6,7 @@ using RP.Business.Dto;
 using RP.Business.Profiles;
 using RP.DataAccess.RepositoryPattern.Core;
 using RP.DataAccess.RepositoryPattern.Entities;
+using System.Collections.Generic;
 
 namespace RP.UnitTests
 {
@@ -89,9 +90,15 @@ namespace RP.UnitTests
         }
 
         [Test]
-        public void GetEmployees_WhenCalled_ShouldReturnListOfEmployees()
+        public void GetEmployees_WhenCalled_ShouldReturnIEnumerableOfEmployeeDto()
         {
+            _unitOfWork.Setup(uow => uow.Employees.GetAll())
+                .Returns(new List<Employee> { _employee });
+            _business = new EmployeeBusiness(_unitOfWork.Object);
 
+            var result = _business.GetEmployees();
+
+            Assert.That(result, Is.InstanceOf(typeof(IEnumerable<EmployeeDto>)));
         }
     }
 }
