@@ -11,11 +11,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{79D384D5
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RP.UnitTests", "Tests\RP.UnitTests\RP.UnitTests.csproj", "{267E5359-42B6-4C2F-AE8A-12CE80C722CC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RP.IntegrationTests", "Tests\RP.IntegrationTests\RP.IntegrationTests.csproj", "{B106ACD3-25B3-4829-971C-FCA80924E0C7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RP.IntegrationTests", "Tests\RP.IntegrationTests\RP.IntegrationTests.csproj", "{B106ACD3-25B3-4829-971C-FCA80924E0C7}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data Access Layer", "Data Access Layer", "{C5F07335-DF51-44C6-A6EB-629094DF1D8F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RP.RepositoryPattern", "Data Access Layer\RP.Repository_Pattern\RP.RepositoryPattern.csproj", "{39A21F5C-7EC4-4478-954F-5DED549B96B1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RP.CompositionRoot", "RP.CompositionRoot\RP.CompositionRoot.csproj", "{98941520-C49E-4C1E-A595-A91DF9FABB85}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,6 +45,10 @@ Global
 		{39A21F5C-7EC4-4478-954F-5DED549B96B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{39A21F5C-7EC4-4478-954F-5DED549B96B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{39A21F5C-7EC4-4478-954F-5DED549B96B1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{98941520-C49E-4C1E-A595-A91DF9FABB85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{98941520-C49E-4C1E-A595-A91DF9FABB85}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{98941520-C49E-4C1E-A595-A91DF9FABB85}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{98941520-C49E-4C1E-A595-A91DF9FABB85}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
