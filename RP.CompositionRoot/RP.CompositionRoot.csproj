@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="4.5.2" />
+    <PackageReference Include="Unity" Version="5.9.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Data Access Layer\RP.Repository_Pattern\RP.RepositoryPattern.csproj" />
+    <ProjectReference Include="..\RP.Business\RP.Business.csproj" />
+  </ItemGroup>
+
+</Project>

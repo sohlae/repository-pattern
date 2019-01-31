@@ -1,20 +1,23 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using RP.Business;
+﻿using RP.Business;
 using RP.Business.Core;
 using RP.DataAccess.RepositoryPattern.Core;
-using System.IO;
 using Unity;
-using Unity.Injection;
 using Unity.Lifetime;
 using ef = RP.DataAccess.RepositoryPattern.EF;
 using sp = RP.DataAccess.RepositoryPattern.StoredProcedures;
 
-namespace RP.UI.Dependency_Injection
+namespace RP.CompositionRoot
 {
-    public class UnityConfiguration
+    public class DependencyInjection<T>
     {
-        public UnityContainer RegisterDependencies()
+        private readonly UnityContainer _container;
+
+        public DependencyInjection()
+        {
+            _container = RegisterDependencies();
+        }
+
+        private UnityContainer RegisterDependencies()
         {
             var container = new UnityContainer();
 
@@ -33,6 +36,11 @@ namespace RP.UI.Dependency_Injection
             #endregion
 
             return container;
+        }
+
+        public T Resolve()
+        {
+            return _container.Resolve<T>();
         }
     }
 }

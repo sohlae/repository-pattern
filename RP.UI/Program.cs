@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
-using RP.UI.Dependency_Injection;
+using RP.CompositionRoot;
 using System.Reflection;
-using Unity;
 
 namespace RP.UI
 {
@@ -9,9 +8,8 @@ namespace RP.UI
     {
         static void Main(string[] args)
         {
-            var unity = new UnityConfiguration();
-            var container = unity.RegisterDependencies();
-            var program = container.Resolve<Initializer>();
+            var unity = new DependencyInjection<Initializer>();
+            var program = unity.Resolve();
 
             Mapper.Initialize(config => config.AddProfiles(Assembly.GetExecutingAssembly()));
 
