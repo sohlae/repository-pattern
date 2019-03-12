@@ -80,12 +80,22 @@ namespace RP.Business
 
         public void RemoveEmployee(int id)
         {
-            var employee = _unitOfWork.Employees
-                .Get(id);
+            try
+            {
+                var employee = _unitOfWork.Employees
+                    .Get(id);
 
-            _unitOfWork.Employees
-                .Remove(employee);
-            _unitOfWork.Complete();
+                if (employee == null) throw new NullReferenceException("Employee cannot be null.");
+
+                _unitOfWork.Employees
+                    .Remove(employee);
+                _unitOfWork.Complete();
+            }
+
+            catch (Exception exception)
+            {
+                throw exception;
+            }
         }
 
         public EmployeeDto EditEmployee(EmployeeDto employeeDto)
