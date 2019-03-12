@@ -23,7 +23,7 @@ namespace RP.DataAccess.RepositoryPattern.EF
 
             try
             {
-                _client = new KeyVaultClient(
+               _client = new KeyVaultClient(
                     new KeyVaultClient.AuthenticationCallback(new AzureServiceTokenProvider().KeyVaultTokenCallback));
 
                 username = GetUsername();
