@@ -23,8 +23,8 @@ namespace RP.DataAccess.RepositoryPattern.EF
 
             try
             {
-               _client = new KeyVaultClient(
-                    new KeyVaultClient.AuthenticationCallback(new AzureServiceTokenProvider().KeyVaultTokenCallback));
+                _client = new KeyVaultClient(
+                     new KeyVaultClient.AuthenticationCallback(new AzureServiceTokenProvider().KeyVaultTokenCallback));
 
                 username = GetUsername();
                 password = GetPassword();
@@ -36,13 +36,13 @@ namespace RP.DataAccess.RepositoryPattern.EF
                         .SetBasePath(Directory.GetCurrentDirectory())
                         .AddJsonFile("appsettings.json");
 
-                    var configuration = builder.Build();
-                    username = configuration["ConnectionStrings:Username"];
-                    password = configuration["ConnectionStrings:Password"];
+                var configuration = builder.Build();
+                username = configuration["ConnectionStrings:Username"];
+                password = configuration["ConnectionStrings:Password"];
             }
 
-            var connectionString = $@"Server=tcp:ernidb.database.windows.net,1433;
-                    Initial Catalog=RP.RepositoryPatternDb;
+            var connectionString = $@"Server=poc-applications.database.windows.net,1433;
+                    Initial Catalog=Repository-Pattern-DB;
                     Persist Security Info=False;
                     User ID={ username };
                     Password={ password };
@@ -72,7 +72,7 @@ namespace RP.DataAccess.RepositoryPattern.EF
         public string GetUsername()
         {
             var username = _client
-                .GetSecretAsync("https://rp-vault-sea.vault.azure.net/secrets/rpdb-username/b9ea59e3642a46d58fe07b8eb359ca34")
+                .GetSecretAsync("https://generalassets.vault.azure.net/secrets/rpdatabase-login/2fe9799aa9334ee087f0647c8e3cc541")
                 .Result;
 
             return username.Value;
@@ -81,7 +81,7 @@ namespace RP.DataAccess.RepositoryPattern.EF
         public string GetPassword()
         {
             var password = _client
-                .GetSecretAsync("https://rp-vault-sea.vault.azure.net/secrets/rp-db-password/9a8f60e43f8a479e8863dbf7cb273dae")
+                .GetSecretAsync("https://generalassets.vault.azure.net/secrets/rpdatabase-password/bb30c143a54c4413b658c6d18745e27f")
                 .Result;
 
             return password.Value;
