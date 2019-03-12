@@ -6,6 +6,7 @@ using RP.Business.Dto;
 using RP.Business.Profiles;
 using RP.DataAccess.RepositoryPattern.Core;
 using RP.DataAccess.RepositoryPattern.Entities;
+using System;
 using System.Collections.Generic;
 
 namespace RP.UnitTests
@@ -41,8 +42,8 @@ namespace RP.UnitTests
 
             _business.AddEmployee(_dto);
 
-            _unitOfWork.Verify(
-                uow => uow.Employees.Add(It.Is<Employee>(e => e.FirstName == "John")), 
+            _unitOfWork.Verify(uow => 
+                uow.Employees.Add(It.Is<Employee>(e => e.FirstName == "John")), 
                 Times.Once);
         }
 
@@ -99,6 +100,21 @@ namespace RP.UnitTests
             var result = _business.GetEmployees();
 
             Assert.That(result, Is.InstanceOf(typeof(IEnumerable<EmployeeDto>)));
+        }
+
+        [Test]
+        public void RemoveEmployee_EmployeeIsNotNull_RemoveEmployeeFromTheDatabase()
+        {
+            _unitOfWork.Setup(uow => uow.Employees.Get(1))
+                .Returns(_employee);
+            _unitOfWork.Setup(uow => uow.Employees.Remove(_employee));
+            _business = new EmployeeBusiness(_unitOfWork.Object);
+
+            _business.RemoveEmployee(1);
+
+            _unitOfWork.Verify(uow =>
+                uow.Employees.Remove(It.Is<Employee>(e => e.FirstName == "John")),
+                Times.Once);
         }
     }
 }
