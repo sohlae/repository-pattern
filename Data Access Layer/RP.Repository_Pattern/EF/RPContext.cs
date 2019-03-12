@@ -81,7 +81,7 @@ namespace RP.DataAccess.RepositoryPattern.EF
         public string GetPassword()
         {
             var password = _client
-                .GetSecretAsync("https://generalassets.vault.azure.net/secrets/rpdatabase-password/bb30c143a54c4413b658c6d18745e27f")
+                .GetSecretAsync("https://generalassets.vault.azure.net/secrets/rpdatabase-password/5708dc89c4fa43b7af23e7e4ab31e2cd")
                 .Result;
 
             return password.Value;
