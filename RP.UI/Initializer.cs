@@ -42,15 +42,15 @@ namespace RP.UI
             #endregion
 
             #region Getting all Employees
-            //var employees = _employeeBusiness.GetEmployees();
+            var employees = _employeeBusiness.GetEmployees();
 
-            //foreach (var employee in employees)
-            //{
-            //    Console.WriteLine("{0} {1} with birthday on {2} has been extracted from the database.",
-            //        employee.FirstName,
-            //        employee.LastName,
-            //        employee.BirthDate.Date);
-            //}
+            foreach (var employee in employees)
+            {
+                Console.WriteLine("{0} {1} with birthday on {2} has been extracted from the database.",
+                    employee.FirstName,
+                    employee.LastName,
+                    employee.BirthDate.Date);
+            }
             #endregion
 
             #region Getting a specific Employee
