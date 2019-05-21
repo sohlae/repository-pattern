@@ -68,6 +68,40 @@ namespace RP.UnitTests
         }
 
         [Test]
+        public void EditEmployee_WhenCalled_ShouldReturnEmployeeDto()
+        {
+            _unitOfWork.Setup(uow => uow.Employees.Get(1))
+                .Returns(_employee);
+            _business = new EmployeeBusiness(_unitOfWork.Object);
+
+            var result = _business.EditEmployee(new EmployeeDto { Id = 1 });
+
+            Assert.That(result, Is.InstanceOf(typeof(EmployeeDto)));
+        }
+
+        [Test]
+        public void EditEmployee_EmployeeExists_ReturnFirstNameOfMark()
+        {
+            _unitOfWork.Setup(uow => uow.Employees.Get(1))
+                .Returns(_employee);
+            _business = new EmployeeBusiness(_unitOfWork.Object);
+
+            var result = _business.EditEmployee(new EmployeeDto { Id = 1, FirstName = "Mark" });
+
+            Assert.That(result.FirstName, Is.EqualTo("Mark"));
+        }
+
+        [Test]
+        public void EditEmployee_EmployeeDoesNotExist_ThrowNullReferenceException()
+        {
+            _unitOfWork.Setup(uow => uow.Employees.Get(1))
+                .Returns((Employee)null);
+            _business = new EmployeeBusiness(_unitOfWork.Object);
+
+            Assert.That(() => _business.EditEmployee(new EmployeeDto { Id = 1 }), Throws.InstanceOf<NullReferenceException>());
+        }
+
+        [Test]
         public void GetEmployeeById_EmployeeDoesNotExist_ReturnsNull()
         {
             _unitOfWork.Setup(uow => uow.Employees.Get(1))
