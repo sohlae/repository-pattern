@@ -8,6 +8,7 @@ using RP.DataAccess.RepositoryPattern.Core;
 using RP.DataAccess.RepositoryPattern.Entities;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace RP.UnitTests
 {
@@ -100,6 +101,30 @@ namespace RP.UnitTests
             var result = _business.GetEmployees();
 
             Assert.That(result, Is.InstanceOf(typeof(IEnumerable<EmployeeDto>)));
+        }
+
+        [Test]
+        public void GetEmployees_ResultCountIsOne_ShouldReturnListWithOneItem()
+        {
+            _unitOfWork.Setup(uow => uow.Employees.GetAll())
+                .Returns(new List<Employee> { _employee });
+            _business = new EmployeeBusiness(_unitOfWork.Object);
+
+            var result = _business.GetEmployees();
+
+            Assert.That(result.Count(), Is.EqualTo(1));
+        }
+
+        [Test]
+        public void GetEmployees_ResultCountIsZero_ShouldReturnNull()
+        {
+            _unitOfWork.Setup(uow => uow.Employees.GetAll())
+                .Returns(new List<Employee>());
+            _business = new EmployeeBusiness(_unitOfWork.Object);
+
+            var result = _business.GetEmployees();
+
+            Assert.Null(result);
         }
 
         [Test]

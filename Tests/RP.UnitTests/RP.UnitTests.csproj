@@ -9,6 +9,12 @@
    <PlatformTarget>AnyCPU</PlatformTarget>
    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="EF\**" />
+    <EmbeddedResource Remove="EF\**" />
+    <None Remove="EF\**" />
+  </ItemGroup>
    
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.9.0" />
@@ -22,7 +28,7 @@
   </ItemGroup>
    
   <ItemGroup>
-    <Folder Include="EF\" />
+    <Folder Include="Data Access Layer\" />
   </ItemGroup>
 
 </Project>
