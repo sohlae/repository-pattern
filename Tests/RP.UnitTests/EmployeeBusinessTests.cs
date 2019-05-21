@@ -141,5 +141,15 @@ namespace RP.UnitTests
                 uow.Employees.Remove(It.Is<Employee>(e => e.FirstName == "John")),
                 Times.Once);
         }
+
+        [Test]
+        public void RemoveEmployee_EmployeeIsNull_ThrowNullReferenceException()
+        {
+            _unitOfWork.Setup(uow => uow.Employees.Get(1))
+               .Returns((Employee)null);
+            _business = new EmployeeBusiness(_unitOfWork.Object);
+
+            Assert.That(() => _business.RemoveEmployee(1), Throws.InstanceOf<NullReferenceException>());
+        }
     }
 }
