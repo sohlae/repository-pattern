@@ -98,7 +98,7 @@ namespace RP.Business
                 var employee = _unitOfWork.Employees
                     .Get(id);
 
-                if (employee == null) throw new NullReferenceException("Employee cannot be null.");
+                if (employee == null) throw new NullReferenceException("Employee does not exist.");
 
                 _unitOfWork.Employees
                     .Remove(employee);
@@ -117,6 +117,9 @@ namespace RP.Business
             {
                 var employee = _unitOfWork.Employees
                     .Get(employeeDto.Id);
+
+                if (employee == null) throw new NullReferenceException("Employee does not exist.");
+
                 employee.FirstName = employeeDto.FirstName;
                 employee.LastName = employeeDto.LastName;
                 employee.BirthDate = employeeDto.BirthDate;
@@ -126,9 +129,9 @@ namespace RP.Business
                 return employeeDto;
             }
 
-            catch
+            catch (Exception exception)
             {
-                return null;
+                throw exception;
             }
         }
     }
