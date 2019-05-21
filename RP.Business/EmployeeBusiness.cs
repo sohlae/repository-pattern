@@ -5,6 +5,7 @@ using RP.DataAccess.RepositoryPattern.Core;
 using RP.DataAccess.RepositoryPattern.Entities;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace RP.Business
 {
@@ -60,10 +61,22 @@ namespace RP.Business
         // Could be used for displaying all the employees to the user interface (i.e. website)
         public IEnumerable<EmployeeDto> GetEmployees()
         {
-            var employees = _unitOfWork.Employees
-                .GetAll();
+            try
+            {
+                var employees = _unitOfWork.Employees
+                    .GetAll();
 
-            return Mapper.Map<IEnumerable<EmployeeDto>>(employees);
+                var result = Mapper.Map<IEnumerable<EmployeeDto>>(employees);
+
+                return result.Count() != 0 ? 
+                    result :
+                    null;
+            }
+
+            catch (Exception exception)
+            {
+                throw exception;
+            }
         }
 
         // Will be used when the salary of all the employees will be computed
